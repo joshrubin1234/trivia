@@ -1,0 +1,10 @@
+{% block content %}
+<h2>Trivia Categories</h2>
+<div class="category-grid">
+  {% for category in categories %}
+  <div class="category-item">
+    <a href="{% url 'game:play' category.id %}">{{ category.name }}</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
