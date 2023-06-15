@@ -1,3 +1,26 @@
-<h1>Trivia</h1>
-<button onclick="location.href='{% url 'login' %}'">Log In</button>
-<button onclick="location.href='{% url 'signup' %}'">Sign Up</button>
+{% load static %}
+<link href="{% static 'style.css' %}" rel="stylesheet">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Trivia Game</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="content">
+        <h1 class="title">
+            <span>T</span>
+            <span>r</span>
+            <span>i</span>
+            <span>v</span>
+            <span>i</span>
+            <span>a</span>
+        </h1>
+        <div class="buttons">
+            <a href="{% url 'signup' %}" class="btn">Sign Up</a>
+            <a href="{% url 'login' %}" class="btn">Log In</a>
+        </div>
+    </div>
+</body>
+</html>
