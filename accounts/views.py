@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from .forms import SignUpForm, LoginForm
+from django.views.decorators.cache import never_cache
+
 # Create your views here.
+@never_cache
 def signup_view(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
@@ -16,6 +19,7 @@ def signup_view(request):
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
+@never_cache
 def login_view(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
