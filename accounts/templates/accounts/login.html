@@ -29,7 +29,8 @@
             </div>
         {% endif %}
 
-        <button class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit</button>
+        <button type="submit" class="btn py-4 px-8 text-lg bg-blue-500 hover:bg-blue-700 rounded-xl text-white">Log In</button>
+        <p class="text-right pt-4">Don't have an account? <a href="{% url 'signup' %}" class="underline text-blue-500">Sign up</a></p>
     </form>
 </div>
 {% endblock %}
