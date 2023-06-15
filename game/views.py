@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 def category_view(request):
     # Fetch or create your categories here
-    categories = [{"id": 1, "name": "Category 1"}, {"id": 2, "name": "Category 2"}, {"id": 3, "name": "Category 3"}]
+    categories = [{"id": 1, "name": "Sports"}, {"id": 2, "name": "Movies/TV"}, {"id": 3, "name": "Music"},{"id": 3, "name": "General Knowledge"}]
     return render(request, 'game/categories.html', {'categories': categories})
 def play_view(request, category_id):
     # You would retrieve the particular category and related data here

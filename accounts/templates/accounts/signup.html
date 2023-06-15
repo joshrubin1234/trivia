@@ -3,6 +3,16 @@
 {% block title %}Sign up{% endblock %}
 
 {% block content %}
+<nav class="py-6 px-6 flex justify-center items-center border-b border-gray-200">
+    <h1 class="trivia">
+        <span>T</span>
+        <span>r</span>
+        <span>i</span>
+        <span>v</span>
+        <span>i</span>
+        <span>a</span>
+    </h1>
+</nav>
  <div class = "w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
     <h1 class="mb-6 text-3xl ">Sign Up</h1>
 
@@ -40,6 +50,7 @@
 
         <button type="submit" class="btn py-4 px-8 text-lg bg-green-500 hover:bg-green-700 rounded-xl text-white">Sign Up</button>
         <p class="text-right pt-4">Already have an account? <a href="{% url 'login' %}" class="underline text-blue-500">Log in</a></p>
+
     </form>
  </div>
  {% endblock %}
