@@ -1,25 +1,48 @@
+{% load static %}
 <!DOCTYPE html>
 
 <html>
     <head>
-        <meta charset="uft-8">
-        <meta name="viewport" content="width=device-width, inital-scale=1.0">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdn.tailwindcss.com"> </script>
+        <style>
+            .trivia {
+                font-family: 'Comic Sans MS', cursive, sans-serif; /* This is where you set the font */
+                font-size: 10em; /* Adjust this value to change the font size */
+                text-align: center;
+            }
+
+            .trivia span:nth-child(1) { color: #e6194b; } /* red */
+            .trivia span:nth-child(2) { color: #3cb44b; } /* green */
+            .trivia span:nth-child(3) { color: #ffe119; } /* yellow */
+            .trivia span:nth-child(4) { color: #4363d8; } /* blue */
+            .trivia span:nth-child(5) { color: #f58231; } /* orange */
+            .trivia span:nth-child(6) { color: #911eb4; } /* purple */
+        </style>
     </head>
 
     <body>
 
-        <nav class = "py-6 px-6 flex justify-between items-center border-b border-gray-200">
-            <h1 class="text-xl font-semibold"> Trivia </h1>
-            <div class="space-x-6">
-    
-            </div>
+        <nav class="py-6 px-6 flex justify-center items-center border-b border-gray-200">
+            <h1 class="trivia">
+                <span>T</span>
+                <span>r</span>
+                <span>i</span>
+                <span>v</span>
+                <span>i</span>
+                <span>a</span>
+            </h1>
         </nav>
 
-        <div class = "px-6 py-6">
+        <div class="px-6 py-6">
             {% block content %}
             {% endblock %}
         </div>
     </body>
 
 </html>
+
+
+
+
