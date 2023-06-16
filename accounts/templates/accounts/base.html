@@ -3,6 +3,7 @@
 
 <html>
     <head>
+        
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdn.tailwindcss.com"> </script>
@@ -23,6 +24,61 @@
             .trivia span:nth-child(8) { color: #3cb44b; } /* green */
             .trivia span:nth-child(9) { color: #ffe119; } /* yellow */
             .trivia span:nth-child(10) { color: #4363d8; } /* blue */
+
+            .grid {
+            height: calc(100vh - 150px);
+            }
+
+            .grid a {
+            background: #ffa500;  /* you can set the different colors you want here */
+            height: calc((100vh - 150px) / 2 - 1rem);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: black;
+            font-size: 2em;
+            }
+
+            .grid a:hover {
+            background: #ff4500;  /* this color will be applied when you hover over the item */
+            }
+
+            /* Add as many of these blocks as you have categories, changing the color for each one. */
+            .grid a:nth-child(1) {
+            background: #1abc9c;
+            }
+
+            .grid a:nth-child(1):hover {
+            background: #16a085;
+            }
+
+            .grid a:nth-child(2) {
+            background: #3498db;
+            }
+
+            .grid a:nth-child(2):hover {
+            background: #2980b9;
+            }
+
+            .grid a:nth-child(3) {
+            background: #f1c40f;
+            }
+
+            .grid a:nth-child(3):hover {
+            background: #f39c12;
+            }
+
+            .grid a:nth-child(4) {
+            background: #e74c3c;
+            }
+
+            .grid a:nth-child(4):hover {
+            background: #c0392b;
+            }
+
+
+            
 
         </style>
     </head>
