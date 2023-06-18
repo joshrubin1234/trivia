@@ -1,0 +1,30 @@
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'game.css' %}">
+
+    <div class="container">
+        <div class="game-info">
+            <div class="question-number">
+                Question: {{ game.questions.count }} / 20
+            </div>
+            <div class="timer-bar">
+                <!-- This will be updated by JavaScript -->
+                <div class="time-left"></div>
+            </div>
+            <div class="score">
+                Score: {{ game.score }}
+            </div>
+        </div>
+        <div class="question">
+            <h2>{{ game.current_question.text }}</h2>
+        </div>
+        <div class="answers">
+            {% for answer in game.current_question.answer_set.all %}
+                <button class="answer" data-answer-id="{{ answer.id }}">
+                    {{ answer.text }}
+                </button>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

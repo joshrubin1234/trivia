@@ -9,3 +9,5 @@ class Game(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     questions = models.ManyToManyField(Question)
     current_question = models.ForeignKey(Question, on_delete=models.SET_NULL, null=True, related_name='+')
+    score = models.IntegerField(default=0)
+    questions_answered = models.IntegerField(default=0)
