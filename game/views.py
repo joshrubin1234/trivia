@@ -12,21 +12,26 @@ def play_view(request, category_id):
     # Retrieve the user and the category
     user = request.user
     category = Category.objects.get(id=category_id)
-
-    # Try to get an existing game for this user and category
     game = Game.objects.filter(user=user, category=category).first()
 
     if game is None:
-        # If there is no existing game, create a new one
         game = Game.objects.create(user=user, category=category)
 
-    # If there is no current question, get the first question from the category
     if game.current_question is None:
         game.current_question = Question.objects.filter(category=category).exclude(id__in=game.questions.all()).order_by('?').first()
         game.save()
 
     print("Current question:", game.current_question)  # Print the current question
 
-    # Pass the game to the template
-    return render(request, 'game/play.html', {'game': game})
+    # Create a list of answer choices for the current question
+    question = game.current_question
+    choices = [question.choice_1,
+               question.choice_2, 
+               question.choice_3, 
+               question.choice_4]
+
+    return render(request, 'game/play.html', {'game': game, 'choices': choices})
+
+
+
 

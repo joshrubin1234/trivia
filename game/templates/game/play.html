@@ -1,6 +1,6 @@
 {% load static %}
 {% block content %}
-    <link rel="stylesheet" href="{% static 'game.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'game.css' %}">
 
     <div class="container">
         <div class="game-info">
@@ -16,15 +16,16 @@
             </div>
         </div>
         <div class="question">
-            <h2>{{ game.current_question.text }}</h2>
+            <h2>{{ game.current_question }}</h2>
         </div>
         <div class="answers">
-            {% for answer in game.current_question.answer_set.all %}
-                <button class="answer" data-answer-id="{{ answer.id }}">
-                    {{ answer.text }}
+            {% for answer in choices %}
+                <button class="answer" data-answer-id="{{ forloop.counter }}">
+                    {{ answer }}
                 </button>
             {% endfor %}
         </div>
+        
     </div>
 {% endblock %}
 

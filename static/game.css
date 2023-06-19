@@ -36,17 +36,20 @@
 
 .answers {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
-    flex-wrap: wrap;
+    align-items: center;
 }
 
 .answer {
-    width: 30%;
-    margin: 10px;
+    width: 100%;
+    margin: 10px 0;
     padding: 20px;
     font-size: 1.2em;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
     cursor: pointer;
+    text-align: center;
 }
+

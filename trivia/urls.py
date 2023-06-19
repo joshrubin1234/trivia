@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from accounts.views import landing_view, signup_view, login_view
-
+from questions.views import category_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('questions/', include('questions.urls')), 
