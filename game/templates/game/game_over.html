@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game Over</title>
+</head>
+<body>
+    <h1>Game Over</h1>
+    <button id="restartButton">Restart Game</button>
+    <button id="homeButton">Go Home</button>
+    
+    <script>
+        document.getElementById('restartButton').addEventListener('click', function() {
+            location.href = '/game/restart/';
+        });
+        
+        document.getElementById('homeButton').addEventListener('click', function() {
+            location.href = '/game/categories/';
+        });
+    </script>
+</body>
+</html>

@@ -20,12 +20,42 @@
         </div>
         <div class="answers">
             {% for answer in choices %}
-                <button class="answer" data-answer-id="{{ forloop.counter }}">
+                <button class="answer" data-answer-id="{{ forloop.counter }}" style="color:black">
                     {{ answer }}
                 </button>
             {% endfor %}
+
+
         </div>
         
     </div>
 {% endblock %}
+
+<script>
+    var answerButtons = document.getElementsByClassName('answer');
+
+    for (var i = 0; i < answerButtons.length; i++) {
+        answerButtons[i].addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // Disable all buttons
+            for (var j = 0; j < answerButtons.length; j++) {
+                answerButtons[j].disabled = true;
+            }
+
+            var clickedButton = this;
+
+            var correctChoiceIndex = "{{ correct_choice_index }}";
+
+            if (parseInt(this.dataset.answerId) === parseInt(correctChoiceIndex)) {
+                clickedButton.style.backgroundColor = 'green';
+                clickedButton.style.color = 'black';
+            } else {
+                clickedButton.style.backgroundColor = 'red';
+                clickedButton.style.color = 'black';
+            }
+        });
+    }
+</script>
+
 
