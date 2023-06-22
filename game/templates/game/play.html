@@ -33,29 +33,71 @@
 
 <script>
     var answerButtons = document.getElementsByClassName('answer');
+    var questionElement = document.querySelector('.question h2');
+    var scoreElement = document.querySelector('.score');
+    var questionNumberElement = document.querySelector('.question-number');
 
     for (var i = 0; i < answerButtons.length; i++) {
         answerButtons[i].addEventListener('click', function(e) {
             e.preventDefault();
 
-            // Disable all buttons
             for (var j = 0; j < answerButtons.length; j++) {
                 answerButtons[j].disabled = true;
             }
 
             var clickedButton = this;
 
-            var correctChoiceIndex = "{{ correct_choice_index }}";
+            fetch('{% url "game:check_answer" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({
+                    'answer_text': this.textContent
+                })
 
-            if (parseInt(this.dataset.answerId) === parseInt(correctChoiceIndex)) {
-                clickedButton.style.backgroundColor = 'green';
-                clickedButton.style.color = 'black';
-            } else {
-                clickedButton.style.backgroundColor = 'red';
-                clickedButton.style.color = 'black';
-            }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (clickedButton.dataset.isCorrect === 'true') {
+                    clickedButton.style.backgroundColor = 'green';
+                } else {
+                    clickedButton.style.backgroundColor = 'red';
+                }
+
+                if (!data.error) {
+                    // Update the question text
+                    questionElement.textContent = data.question;
+
+                    // Update the score
+                    scoreElement.textContent = 'Score: ' + data.score;
+
+                    // Update the question number
+                    questionNumberElement.textContent = 'Question: ' + data.questions_answered + ' / 20';
+
+                    // Update the answer choices
+                    for (var k = 0; k < answerButtons.length; k++) {
+                        answerButtons[k].textContent = data.choices[k];
+                        answerButtons[k].disabled = false;
+                        answerButtons[k].style.backgroundColor = '#F0F0F0';
+                        answerButtons[k].style.color = 'black';
+
+                        if (k === data.correct_choice_index) {
+                            answerButtons[k].dataset.isCorrect = 'true';
+                        } else {
+                            answerButtons[k].dataset.isCorrect = 'false';
+                        }
+                    }
+                } else {
+                    // Handle error
+                    console.error(data.error);
+                }
+            });
         });
     }
 </script>
+
+
 
 

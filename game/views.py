@@ -30,24 +30,32 @@ def play_view(request, category_id):
 
     # Create a list of answer choices for the current question
     question = game.current_question
-    choices = [question.choice_1,
-               question.choice_2, 
-               question.choice_3, 
-               question.choice_4]
+    # Create a list of answer choices for the current question
+    if game.current_question is not None:
+        choices = [question.choice_1,
+                   question.choice_2, 
+                   question.choice_3, 
+                   question.choice_4]
 
-    return render(request, 'game/play.html', {
-    'game': game, 
-    'choices': choices,
-    'correct_choice_index': game.current_question.correct_choice  # Add this line
-})
+        correct_choice_index = int(game.current_question.correct_choice) - 1
+
+        return render(request, 'game/play.html', {
+        'game': game, 
+        'choices': choices,
+        'correct_choice_index': correct_choice_index
+        })
+    else:
+        return render(request, 'game/play.html', {
+        'game': game, 
+        'error': "No question available"
+        })
 
 
-@login_required
 @login_required
 @csrf_exempt
 def check_answer(request):
     data = json.loads(request.body)
-    answer_id = data.get('answer_id')
+    answer_text = data.get('answer_text')
 
     # Retrieve the game instance related to the current user
     game = Game.objects.filter(user=request.user).first()
@@ -57,7 +65,7 @@ def check_answer(request):
         return JsonResponse({'error': 'Game not found or no question to answer.'}, status=404)
 
     # Check if the answer is correct
-    is_correct = (game.current_question.correct_choice == answer_id)
+    is_correct = (game.current_question.correct_choice == answer_text)
 
     # Update the score if the answer is correct
     if is_correct:
@@ -69,10 +77,21 @@ def check_answer(request):
     game.save()
 
     # Create a list of answer choices for the new question
-    choices = [game.current_question.choice_1,
-               game.current_question.choice_2, 
-               game.current_question.choice_3, 
-               game.current_question.choice_4]
+    if game.current_question is not None:
+        choices = [game.current_question.choice_1,
+                   game.current_question.choice_2, 
+                   game.current_question.choice_3, 
+                   game.current_question.choice_4]
 
-    # Send back whether the answer was correct, the new question, and choices
-    return JsonResponse({'is_correct': is_correct, 'question': game.current_question.question_text, 'choices': choices})
+        correct_choice_index = int(game.current_question.correct_choice) - 1  # Get the index of the correct choice for the new question
+
+  # Get the index of the correct choice for the new question
+
+    # Send back whether the answer was correct, the new question, correct choice index, and choices
+    # Send back whether the answer was correct, the new question, correct choice index, and choices
+        return JsonResponse({'is_correct': is_correct, 'question': game.current_question.question_text, 'correct_choice_index': correct_choice_index, 'choices': choices, 'score': game.score, 'questions_answered': game.questions.count()})
+    else:
+        # There are no more questions
+        return JsonResponse({'is_correct': is_correct, 'error': 'No more questions available.', 'score': game.score, 'questions_answered': game.questions.count()})
+
+
