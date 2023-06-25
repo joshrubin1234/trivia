@@ -5,7 +5,7 @@
     <div class="container">
         <div class="game-info">
             <div class="question-number">
-                Question: {{ game.questions.count }} / 20
+                Question: {{ game.questions.count|add:"1" }} / 20
             </div>
             <div class="timer-bar">
                 <!-- This will be updated by JavaScript -->
@@ -79,7 +79,11 @@
                         scoreElement.textContent = 'Score: ' + data.score;
     
                         // Update the question number
-                        questionNumberElement.textContent = 'Question: ' + data.questions_answered + ' / 20';
+                        // Update the question number
+                        
+                        questionNumberElement.textContent = 'Question: ' + (data.questions_answered + 1) + ' / 20';
+
+                    
     
                         // Update the answer choices
                         for (var k = 0; k < answerButtons.length; k++) {

@@ -88,6 +88,7 @@ def check_answer(request):
 
     # Update the current question
     game.questions.add(game.current_question)
+    game.questions_answered += 1
     game.current_question = Question.objects.filter(category=game.category).exclude(id__in=game.questions.all()).order_by('?').first()
     game.save()
 
